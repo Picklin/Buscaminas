@@ -131,7 +131,7 @@ void print_result(matrix& mapa) {
 }
 
 void dfs_selection(pair<int, int>& pos, matrix& mapa) {
-    if (not mapa[pos.first][pos.second].visitado) {
+    if (not mapa[pos.first][pos.second].visitado and mapa[pos.first][pos.second].encima == 'X') {
         mapa[pos.first][pos.second].encima = mapa[pos.first][pos.second].debajo;
         mapa[pos.first][pos.second].visitado = true;
         --num_no_bombs;
@@ -179,7 +179,7 @@ int rounds(matrix& mapa) {
                 //casillas a marcar
                 else {
                     if (mapa[pos2.first][pos2.second].encima == 'X') mapa[pos2.first][pos2.second].encima = 'F';
-                    else mapa[pos2.first][pos2.second].encima = 'X';
+                    else if (mapa[pos2.first][pos2.second].encima == 'F') mapa[pos2.first][pos2.second].encima = 'X';
                 }
             }
             print_result(mapa);
